@@ -20,3 +20,17 @@ plugins {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+
+tasks.koverMergedHtmlReport {
+    enabled = true
+    htmlReportDir.set(layout.buildDirectory.dir("html-merged-report/html-result"))
+    includes = ['com.rmiranda.koverpoc.*']
+    excludes = ['com.rmiranda.koverpoc.databinding.*', 'com.rmiranda.koverpoc.BuildConfig']
+}
+
+tasks.koverMergedXmlReport {
+    enabled = true
+    xmlReportFile.set(layout.buildDirectory.file("xml-merged-report/result.xml"))
+    includes = ['com.rmiranda.koverpoc.*']
+    excludes = ['com.rmiranda.koverpoc.databinding.*', 'com.rmiranda.koverpoc.BuildConfig']
+}
