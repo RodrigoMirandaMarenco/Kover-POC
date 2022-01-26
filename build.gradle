@@ -21,16 +21,19 @@ task clean(type: Delete) {
     delete rootProject.buildDir
 }
 
+ext {
+    koverIncludedPackages = ['com.rmiranda.koverpoc.*', 'com.rmiranda.data.*']
+    koverExcludedPackages = ['com.rmiranda.koverpoc.databinding.*', 'com.rmiranda.koverpoc.BuildConfig', 'com.rmiranda.data.BuildConfig']
+}
+
 tasks.koverMergedHtmlReport {
     enabled = true
-    htmlReportDir.set(layout.buildDirectory.dir("html-merged-report/html-result"))
-    includes = ['com.rmiranda.koverpoc.*', 'com.rmiranda.data.*']
-    excludes = ['com.rmiranda.koverpoc.databinding.*', 'com.rmiranda.koverpoc.BuildConfig']
+    includes = koverIncludedPackages
+    excludes = koverExcludedPackages
 }
 
 tasks.koverMergedXmlReport {
     enabled = true
-    xmlReportFile.set(layout.buildDirectory.file("xml-merged-report/result.xml"))
-    includes = ['com.rmiranda.koverpoc.*', 'com.rmiranda.data.*']
-    excludes = ['com.rmiranda.koverpoc.databinding.*', 'com.rmiranda.koverpoc.BuildConfig']
+    includes = koverIncludedPackages
+    excludes = koverExcludedPackages
 }
